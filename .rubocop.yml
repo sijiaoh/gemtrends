@@ -9,13 +9,23 @@ AllCops:
 
 Style/FrozenStringLiteralComment:
   Enabled: false
-
 Style/StringLiterals:
   Enabled: true
   EnforcedStyle: double_quotes
-
 Style/Documentation:
   Enabled: false
 
 Metrics/BlockLength:
+  Enabled: false
+
+RSpec/DescribedClass:
+  EnforcedStyle: explicit
+RSpec/NamedSubject:
+  EnforcedStyle: always
+
+RSpec/AnyInstance:
+  Enabled: false
+RSpec/StubbedMock:
+  Enabled: false
+RSpec/ExpectInHook:
   Enabled: false
