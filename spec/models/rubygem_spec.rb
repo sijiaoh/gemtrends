@@ -21,15 +21,15 @@ describe Rubygem do
     end
   end
 
-  describe "#daily_total_downloads" do
-    subject(:daily_total_downloads) { rubygem.daily_total_downloads }
+  describe "#daily_downloads" do
+    subject(:daily_downloads) { rubygem.daily_downloads }
 
     let(:source_data) do
-      # https://github.com/xmisao/bestgems.org/wiki/BestGems-API-v1-Specification#total-downloads-trends
+      # https://github.com/xmisao/bestgems.org/wiki/BestGems-API-v1-Specification#daily-downloads-trends
       [
-        { "date" => "2014-07-16", "total_downloads" => 123 },
-        { "date" => "2014-07-15", "total_downloads" => 456 },
-        { "date" => "2014-07-14", "total_downloads" => 789 }
+        { "date" => "2014-07-16", "daily_downloads" => 123 },
+        { "date" => "2014-07-15", "daily_downloads" => 456 },
+        { "date" => "2014-07-14", "daily_downloads" => 789 }
       ]
     end
 
@@ -37,41 +37,41 @@ describe Rubygem do
       expect_any_instance_of(Rubygem).to receive(:fetch_source_data).and_return(source_data)
     end
 
-    it "returns daily total downloads" do
-      expect(daily_total_downloads).to eq(source_data.map do |datum|
-        { date: Time.zone.parse(datum["date"]), total_downloads: datum["total_downloads"] }
+    it "returns daily downloads" do
+      expect(daily_downloads).to eq(source_data.map do |datum|
+        { date: Time.zone.parse(datum["date"]), count: datum["daily_downloads"] }
       end)
     end
   end
 
-  describe "#weekly_total_downloads" do
-    subject(:weekly_total_downloads) { rubygem.weekly_total_downloads }
+  describe "#weekly_downloads" do
+    subject(:weekly_downloads) { rubygem.weekly_downloads }
 
     let(:days) { 14 }
-    let(:daily_total_downloads) do
+    let(:daily_downloads) do
       Array.new(days) do |i|
-        { date: Time.zone.parse("2014-07-#{i + 1}"), total_downloads: i + 1 }
+        { date: Time.zone.parse("2014-07-#{i + 1}"), count: i + 1 }
       end.reverse
     end
 
     before do
-      expect_any_instance_of(Rubygem).to receive(:daily_total_downloads).and_return(daily_total_downloads)
+      expect_any_instance_of(Rubygem).to receive(:daily_downloads).and_return(daily_downloads)
     end
 
-    it "returns weekly total downloads" do
-      expect(weekly_total_downloads).to eq [
-        { date: Time.zone.parse("2014-07-14"), total_downloads: 77 },
-        { date: Time.zone.parse("2014-07-07"), total_downloads: 28 }
+    it "returns weekly downloads" do
+      expect(weekly_downloads).to eq [
+        { date: Time.zone.parse("2014-07-14"), count: 77 },
+        { date: Time.zone.parse("2014-07-07"), count: 28 }
       ]
     end
 
     context "when last week is not 7 days" do
       let(:days) { 13 }
 
-      it "returns weekly total downloads" do
-        expect(weekly_total_downloads).to eq [
-          { date: Time.zone.parse("2014-07-13"), total_downloads: 70 },
-          { date: Time.zone.parse("2014-07-06"), total_downloads: 21 }
+      it "returns weekly downloads" do
+        expect(weekly_downloads).to eq [
+          { date: Time.zone.parse("2014-07-13"), count: 70 },
+          { date: Time.zone.parse("2014-07-06"), count: 21 }
         ]
       end
     end
