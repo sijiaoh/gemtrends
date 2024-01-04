@@ -8,6 +8,8 @@ class Chart
 
   # JSON for ChartController.js
   # @return [String]
+  # @example
+  #   { name: [{ date: "2021-01-01", count: 1 }] }
   def to_chart_view_json
     rubygems_by_name.transform_values do |rubygem|
       rubygem.weekly_total_downloads.map do |datum|

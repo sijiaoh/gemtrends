@@ -1,1 +1,6 @@
-<%= @chart.to_chart_view_json %>
+<div
+  class="w-full"
+  data-controller="chart"
+  data-chart-data-value="<%= @chart.to_chart_view_json %>">
+  <canvas data-chart-target="chart"></canvas>
+</div>
