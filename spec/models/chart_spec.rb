@@ -29,7 +29,7 @@ describe Chart do
 
       def stub_rubygem(name)
         rubygem = instance_double(Rubygem, name:)
-        expect(rubygem).to receive(:weekly_total_downloads).and_return([])
+        expect(rubygem).to receive(:weekly_downloads).and_return([])
         expect(Rubygem).to receive(:new).with(name:).and_return(rubygem)
       end
 
@@ -43,13 +43,13 @@ describe Chart do
       end
     end
 
-    context "when rubygem has weekly total downloads" do
+    context "when rubygem has weekly downloads" do
       let(:chart) { build(:chart, query: "rails", period:) }
-      let(:weekly_total_downloads) do
+      let(:weekly_downloads) do
         [
-          { date: Date.new(2021, 3, 1), total_downloads: 3 },
-          { date: Date.new(2021, 2, 1), total_downloads: 2 },
-          { date: Date.new(2021, 1, 1), total_downloads: 1 }
+          { date: Date.new(2021, 3, 1), count: 3 },
+          { date: Date.new(2021, 2, 1), count: 2 },
+          { date: Date.new(2021, 1, 1), count: 1 }
         ]
       end
       let(:period) { ChartPeriod.new(type: :all_time) }
@@ -57,15 +57,15 @@ describe Chart do
       before do
         travel_to Date.new(2021, 3, 1)
 
-        expect_any_instance_of(Rubygem).to receive(:weekly_total_downloads).and_return(weekly_total_downloads)
+        expect_any_instance_of(Rubygem).to receive(:weekly_downloads).and_return(weekly_downloads)
       end
 
-      it "returns all weekly total downloads" do
+      it "returns all weekly downloads" do
         expect(JSON.parse(to_chart_view_json)).to match(
           "rails" => [
-            { "date" => "2021-03-01", "total_downloads" => 3 },
-            { "date" => "2021-02-01", "total_downloads" => 2 },
-            { "date" => "2021-01-01", "total_downloads" => 1 }
+            { "date" => "2021-03-01", "count" => 3 },
+            { "date" => "2021-02-01", "count" => 2 },
+            { "date" => "2021-01-01", "count" => 1 }
           ]
         )
       end
@@ -73,11 +73,11 @@ describe Chart do
       context "when period is one month" do
         let(:period) { ChartPeriod.new(type: :one_month) }
 
-        it "returns weekly total downloads in one month only" do
+        it "returns weekly downloads in one month only" do
           expect(JSON.parse(to_chart_view_json)).to match(
             "rails" => [
-              { "date" => "2021-03-01", "total_downloads" => 3 },
-              { "date" => "2021-02-01", "total_downloads" => 2 }
+              { "date" => "2021-03-01", "count" => 3 },
+              { "date" => "2021-02-01", "count" => 2 }
             ]
           )
         end
