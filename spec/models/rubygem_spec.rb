@@ -47,8 +47,9 @@ describe Rubygem do
   describe "#weekly_total_downloads" do
     subject(:weekly_total_downloads) { rubygem.weekly_total_downloads }
 
+    let(:days) { 14 }
     let(:daily_total_downloads) do
-      Array.new(14) do |i|
+      Array.new(days) do |i|
         { date: Time.zone.parse("2014-07-#{i + 1}"), total_downloads: i + 1 }
       end.reverse
     end
@@ -62,6 +63,17 @@ describe Rubygem do
         { date: Time.zone.parse("2014-07-14"), total_downloads: 77 },
         { date: Time.zone.parse("2014-07-07"), total_downloads: 28 }
       ]
+    end
+
+    context "when last week is not 7 days" do
+      let(:days) { 13 }
+
+      it "returns weekly total downloads" do
+        expect(weekly_total_downloads).to eq [
+          { date: Time.zone.parse("2014-07-13"), total_downloads: 70 },
+          { date: Time.zone.parse("2014-07-06"), total_downloads: 21 }
+        ]
+      end
     end
   end
 end
