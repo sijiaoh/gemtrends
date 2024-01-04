@@ -2,9 +2,9 @@ class Chart
   include ActiveModel::Model
   include ActiveModel::Attributes
 
-  attribute :query, :string
+  attribute :query, :string, default: ""
   # @return [ChartPeriod]
-  attribute :period
+  attribute :period, default: -> { ChartPeriod.new }
 
   validates :query, format: { with: /\A[a-z0-9\-_\s]+\z/ }
 
