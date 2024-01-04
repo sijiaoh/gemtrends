@@ -1,6 +1,10 @@
-<div
-  class="w-full"
-  data-controller="chart"
-  data-chart-data-value="<%= @chart.to_chart_view_json %>">
-  <canvas data-chart-target="chart"></canvas>
+<div class="w-full">
+  <div class="m-8">
+    <%= render "components/search", value: @chart.query %>
+  </div>
+  <div
+    data-controller="chart"
+    data-chart-data-value="<%= @chart.to_chart_view_json %>">
+    <canvas data-chart-target="chart"></canvas>
+  </div>
 </div>

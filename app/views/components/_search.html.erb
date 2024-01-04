@@ -1,8 +1,9 @@
-<%= form_with class: "flex w-full" do |form| %>
+<%= form_with url: chart_path, method: :get, class: "flex w-full" do |form| %>
   <%= form.text_field(
         :query,
-        class: "flex-1 focus:ring-0 border-red-400 focus:border-red-400 rounded-l-lg",
-        placeholder: "Gem names separated by space."
+        value: local_assigns[:value],
+        placeholder: "Gem names separated by space.",
+        class: "flex-1 focus:ring-0 border-red-400 focus:border-red-400 rounded-l-lg"
       ) %>
-  <%= form.submit t("search"), class: "border border-l-0 border-red-400 rounded-r-lg px-4 text-red-500 cursor-pointer" %>
+  <%= form.submit t("search"), name: nil, class: "border border-l-0 border-red-400 rounded-r-lg px-4 text-red-500 cursor-pointer" %>
 <% end %>
