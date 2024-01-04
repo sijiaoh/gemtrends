@@ -85,4 +85,5 @@ production:
   <<: *default
   database: gemtrends_production
   host: <%= ENV["GEMTRENDS_DATABASE_HOST"] %>
+  username: <%= ENV["GEMTRENDS_DATABASE_USERNAME"] %>
   password: <%= ENV["GEMTRENDS_DATABASE_PASSWORD"] %>
