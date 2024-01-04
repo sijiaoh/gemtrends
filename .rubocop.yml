@@ -19,6 +19,8 @@ Metrics/BlockLength:
   Enabled: false
 Metrics/MethodLength:
   Enabled: false
+Metrics/AbcSize:
+  Enabled: false
 
 RSpec/DescribedClass:
   EnforcedStyle: explicit
@@ -32,4 +34,8 @@ RSpec/StubbedMock:
 RSpec/ExpectInHook:
   Enabled: false
 RSpec/MessageSpies:
+  Enabled: false
+RSpec/ExampleLength:
+  Enabled: false
+RSpec/NestedGroups:
   Enabled: false
