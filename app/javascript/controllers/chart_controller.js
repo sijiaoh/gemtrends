@@ -13,14 +13,14 @@ export default class extends Controller {
   };
 
   connect() {
-    const weeklyTotalDownloadsByName = this.dataValue;
+    const weeklyDownloadsByName = this.dataValue;
     // Reverse the order of the data so that the chart starts at the left.
-    Object.values(weeklyTotalDownloadsByName).map((weeklyTotalDownloads) =>
-      weeklyTotalDownloads.reverse(),
+    Object.values(weeklyDownloadsByName).map((weeklyDownloads) =>
+      weeklyDownloads.reverse(),
     );
 
-    const datesArray = Object.values(weeklyTotalDownloadsByName).map(
-      (weeklyTotalDownloads) => weeklyTotalDownloads.map(({ date }) => date),
+    const datesArray = Object.values(weeklyDownloadsByName).map(
+      (weeklyDownloads) => weeklyDownloads.map(({ date }) => date),
     );
     const longestDates = datesArray.sort((a, b) => b.length - a.length)[0];
     const horizontalAxisLabels = longestDates;
@@ -30,19 +30,19 @@ export default class extends Controller {
     // Use red to first color.
     const colorIndexOffset = 2;
 
-    const datasets = Object.entries(weeklyTotalDownloadsByName).map(
-      ([name, weeklyTotalDownloads], index) => {
+    const datasets = Object.entries(weeklyDownloadsByName).map(
+      ([name, weeklyDownloads], index) => {
         const color =
           allColors[((index + colorIndexOffset) * 2) % allColorsCount];
 
         // Fill in nulls for dates that don't have data.
         const filler = Array(
-          horizontalAxisLabels.length - weeklyTotalDownloads.length,
+          horizontalAxisLabels.length - weeklyDownloads.length,
         ).fill(null);
 
         const data = [
           ...filler,
-          ...weeklyTotalDownloads.map(({ total_downloads }) => total_downloads),
+          ...weeklyDownloads.map(({ count }) => count),
         ];
 
         return {
