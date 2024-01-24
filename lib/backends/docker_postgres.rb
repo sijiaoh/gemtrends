@@ -45,4 +45,4 @@ module Backends
   end
 end
 
-Backends::DockerPostgres.start(ARGV)
+Backends::DockerPostgres.start ARGV

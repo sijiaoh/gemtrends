@@ -2,6 +2,7 @@ require:
   - rubocop-performance
   - rubocop-rspec
   - rubocop-rails
+  - rubocop-factory_bot
 
 AllCops:
   TargetRubyVersion: 3.2
@@ -14,6 +15,13 @@ Style/StringLiterals:
   EnforcedStyle: double_quotes
 Style/Documentation:
   Enabled: false
+Style/MethodCallWithArgsParentheses:
+  Enabled: true
+  EnforcedStyle: omit_parentheses
+  AllowParenthesesInMultilineCall: true
+  AllowParenthesesInChaining: true
+  AllowParenthesesInCamelCaseMethod: true
+  AllowParenthesesInStringInterpolation: true
 
 Metrics/BlockLength:
   Enabled: false
@@ -26,16 +34,14 @@ RSpec/DescribedClass:
   EnforcedStyle: explicit
 RSpec/NamedSubject:
   EnforcedStyle: always
+RSpec/ExampleLength:
+  Enabled: false
+RSpec/NestedGroups:
+  Enabled: false
 
 RSpec/AnyInstance:
   Enabled: false
 RSpec/StubbedMock:
   Enabled: false
-RSpec/ExpectInHook:
-  Enabled: false
 RSpec/MessageSpies:
-  Enabled: false
-RSpec/ExampleLength:
-  Enabled: false
-RSpec/NestedGroups:
   Enabled: false

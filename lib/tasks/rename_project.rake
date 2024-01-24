@@ -5,11 +5,11 @@ task :rename_project, [:name] => :environment do |_, args|
   new_name = args[:name]
 
   replace = proc do |prev_str, new_str|
-    paths = `git grep --files-with-matches #{prev_str}`.split("\n")
+    paths = `git grep --files-with-matches #{prev_str}`.split "\n"
     paths.each do |path|
-      next if ignore_files.include?(File.basename(path))
+      next if ignore_files.include? File.basename(path)
 
-      file = File.read(path)
+      file = File.read path
       file.gsub! prev_str, new_str
 
       File.write path, file
