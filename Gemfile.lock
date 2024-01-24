@@ -319,6 +319,7 @@ DEPENDENCIES
   shoulda-matchers
   stimulus-rails
   tailwindcss-rails
+  thor
   turbo-rails
 
 RUBY VERSION

@@ -16,6 +16,7 @@ gem "faraday"
 
 group :development, :test do
   gem "debug"
+  gem "thor"
 
   gem "erb_lint", require: false
   gem "rubocop", require: false
