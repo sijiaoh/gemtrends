@@ -24,7 +24,7 @@ describe Rubygem do
   describe "#daily_downloads" do
     subject(:daily_downloads) { rubygem.daily_downloads }
 
-    let(:source_data) do
+    let :source_data do
       # https://github.com/xmisao/bestgems.org/wiki/BestGems-API-v1-Specification#daily-downloads-trends
       [
         { "date" => "2014-07-16", "daily_downloads" => 123 },
@@ -48,8 +48,8 @@ describe Rubygem do
     subject(:weekly_downloads) { rubygem.weekly_downloads }
 
     let(:days) { 14 }
-    let(:daily_downloads) do
-      Array.new(days) do |i|
+    let :daily_downloads do
+      Array.new days do |i|
         { date: Time.zone.parse("2014-07-#{i + 1}"), count: i + 1 }
       end.reverse
     end

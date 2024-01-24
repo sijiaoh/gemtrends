@@ -1,10 +1,10 @@
 require "rails_helper"
 
 describe Chart do
-  subject(:chart) { build(:chart) }
+  subject(:chart) { build :chart }
 
   describe "#query" do
-    subject(:chart) { build(:chart, query:) }
+    subject(:chart) { build :chart, query: }
 
     let(:query) { "pundit cancancan" }
 
@@ -25,7 +25,7 @@ describe Chart do
     subject(:to_chart_view_json) { chart.to_chart_view_json }
 
     context "when query has two rubygem names" do
-      let(:chart) { build(:chart, query: "pundit cancancan") }
+      let(:chart) { build :chart, query: "pundit cancancan" }
 
       def stub_rubygem(name)
         rubygem = instance_double(Rubygem, name:)
@@ -34,8 +34,8 @@ describe Chart do
       end
 
       before do
-        stub_rubygem("pundit")
-        stub_rubygem("cancancan")
+        stub_rubygem "pundit"
+        stub_rubygem "cancancan"
       end
 
       it "returns two keys" do
@@ -44,15 +44,15 @@ describe Chart do
     end
 
     context "when rubygem has weekly downloads" do
-      let(:chart) { build(:chart, query: "rails", period:) }
-      let(:weekly_downloads) do
+      let(:chart) { build :chart, query: "rails", period: }
+      let :weekly_downloads do
         [
           { date: Date.new(2021, 3, 1), count: 3 },
           { date: Date.new(2021, 2, 1), count: 2 },
           { date: Date.new(2021, 1, 1), count: 1 }
         ]
       end
-      let(:period) { ChartPeriod.new(type: :all_time) }
+      let(:period) { ChartPeriod.new type: :all_time }
 
       before do
         travel_to Date.new(2021, 3, 1)
@@ -71,7 +71,7 @@ describe Chart do
       end
 
       context "when period is one month" do
-        let(:period) { ChartPeriod.new(type: :one_month) }
+        let(:period) { ChartPeriod.new type: :one_month }
 
         it "returns weekly downloads in one month only" do
           expect(JSON.parse(to_chart_view_json)).to match(

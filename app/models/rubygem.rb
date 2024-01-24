@@ -36,7 +36,7 @@ class Rubygem
   def fetch_source_data
     raise "Should mock Rubygem#fetch_source_data in test." if Rails.env.test?
 
-    res = Rails.cache.fetch("https://bestgems.org/api/v1/gems/#{name}/daily_downloads.json", expires_in: 12.hours) do
+    res = Rails.cache.fetch "https://bestgems.org/api/v1/gems/#{name}/daily_downloads.json", expires_in: 12.hours do
       Faraday.get "https://bestgems.org/api/v1/gems/#{name}/daily_downloads.json"
     end
     JSON.parse res.body

@@ -15,7 +15,7 @@ class Chart
   def to_chart_view_json
     rubygems_by_name.transform_values do |rubygem|
       weekly_downloads_in_period = rubygem.weekly_downloads.take_while do |datum|
-        period.in_period?(datum[:date])
+        period.in_period? datum[:date]
       end
       weekly_downloads_in_period.map do |datum|
         { date: datum[:date].strftime("%F"), count: datum[:count] }
@@ -28,7 +28,7 @@ class Chart
   # @return [Hash<String, Rubygem>] key is rubygem name.
   def rubygems_by_name
     @rubygems_by_name ||= rubygem_names.index_with do |name|
-      Rubygem.new(name:)
+      Rubygem.new name:
     end
   end
 

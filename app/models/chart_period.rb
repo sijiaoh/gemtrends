@@ -37,7 +37,7 @@ class ChartPeriod
       all_time: nil
     }
 
-    raise "Unexpected type: #{type}" unless period_date_hash.key?(type)
+    raise "Unexpected type: #{type}" unless period_date_hash.key? type
 
     period_date_hash[type]
   end
