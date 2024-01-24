@@ -40,10 +40,7 @@ export default class extends Controller {
           horizontalAxisLabels.length - weeklyDownloads.length,
         ).fill(null);
 
-        const data = [
-          ...filler,
-          ...weeklyDownloads.map(({ count }) => count),
-        ];
+        const data = [...filler, ...weeklyDownloads.map(({ count }) => count)];
 
         return {
           label: name,
