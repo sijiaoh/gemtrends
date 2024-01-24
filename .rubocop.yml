@@ -45,3 +45,6 @@ RSpec/StubbedMock:
   Enabled: false
 RSpec/MessageSpies:
   Enabled: false
+
+FactoryBot/ConsistentParenthesesStyle:
+  Enabled: false
