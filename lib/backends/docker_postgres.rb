@@ -44,5 +44,3 @@ module Backends
     def image = "postgres:16"
   end
 end
-
-Backends::DockerPostgres.start ARGV

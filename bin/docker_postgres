@@ -1,3 +1,3 @@
 #!/bin/bash
 
-bin/rails runner ./lib/backends/docker_postgres.rb $@
+bin/rails runner "Backends::DockerPostgres.start ARGV" -- $@
