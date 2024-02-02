@@ -9,7 +9,7 @@
   <%= form.select(
         :period,
         options_for_select(
-          ChartPeriod::TYPES.map { |type| [t("period.#{type}"), type] },
+          ChartPeriod::TYPES.map { |type| [ t("period.#{type}"), type ] },
           chart.period.type
         ),
         {},
