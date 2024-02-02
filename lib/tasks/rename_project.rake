@@ -1,5 +1,5 @@
-task :rename_project, [:name] => :environment do |_, args|
-  ignore_files = ["rename_project.rake", "README.md"]
+task :rename_project, [ :name ] => :environment do |_, args|
+  ignore_files = [ "rename_project.rake", "README.md" ]
 
   current_name = Rails.application.class.module_parent_name
   new_name = args[:name]

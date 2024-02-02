@@ -1,7 +1,8 @@
+inherit_gem:
+  rubocop-rails-omakase: rubocop.yml
+
 require:
-  - rubocop-performance
   - rubocop-rspec
-  - rubocop-rails
   - rubocop-factory_bot
 
 AllCops:
@@ -10,9 +11,6 @@ AllCops:
 
 Style/FrozenStringLiteralComment:
   Enabled: false
-Style/StringLiterals:
-  Enabled: true
-  EnforcedStyle: double_quotes
 Style/Documentation:
   Enabled: false
 Style/MethodCallWithArgsParentheses:
