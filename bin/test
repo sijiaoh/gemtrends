@@ -7,6 +7,10 @@ set -eu
 ./bin/rails db:create
 ./bin/rails db:migrate
 
+# Fix `'tailwind.css' was not found` in ci.
+# https://github.com/rails/tailwindcss-rails/issues/153
+./bin/rails tailwindcss:build
+
 ./bin/lint --quiet
 bundle exec annotate --frozen
 bundle exec brakeman --quiet --no-pager --no-summary
