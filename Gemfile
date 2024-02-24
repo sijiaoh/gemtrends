@@ -18,6 +18,7 @@ group :development, :test do
   gem "debug"
   gem "thor"
 
+gem "htmlbeautifier", require: false
   gem "erb_lint", require: false
   gem "rubocop", require: false
   gem "rubocop-performance", require: false
